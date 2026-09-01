@@ -1,4 +1,4 @@
-project "Core"
+project "Vertex"
    kind "StaticLib"
    language "C++"
    cppdialect "C++20"

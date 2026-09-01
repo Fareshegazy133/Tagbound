@@ -1,8 +1,8 @@
 -- premake5.lua
-workspace "New Project"
+workspace "Tagbound"
    architecture "x64"
    configurations { "Debug", "Release", "Dist" }
-   startproject "App"
+   startproject "Tagbound"
 
    -- Workspace-wide build options for MSVC
    filter "system:windows"
@@ -10,8 +10,8 @@ workspace "New Project"
 
 OutputDir = "%{cfg.system}-%{cfg.architecture}/%{cfg.buildcfg}"
 
-group "Core"
-	include "Core/Build-Core.lua"
+group "Vertex"
+	include "Vertex/Build-Vertex.lua"
 group ""
 
-include "App/Build-App.lua"
+include "Tagbound/Build-Tagbound.lua"

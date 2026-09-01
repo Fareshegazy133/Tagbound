@@ -1,4 +1,4 @@
-project "App"
+project "Tagbound"
    kind "ConsoleApp"
    language "C++"
    cppdialect "C++20"
@@ -10,14 +10,12 @@ project "App"
    includedirs
    {
       "Source",
-
-	  -- Include Core
-	  "../Core/Source"
+	  "../Vertex/Source"
    }
 
    links
    {
-      "Core"
+      "Vertex"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
