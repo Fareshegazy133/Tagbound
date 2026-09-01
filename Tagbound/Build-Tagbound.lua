@@ -1,5 +1,5 @@
 project "Tagbound"
-    kind "ConsoleApp"
+    kind "StaticLib"
     language "C++"
     cppdialect "C++20"
     staticruntime "off"
@@ -14,27 +14,15 @@ project "Tagbound"
     {
         "Source",
         "../Vertex/Runtime/Source",
-        "../Vertex/Vendor/raylib/src"
     }
 
     links
     {
         "VertexRuntime",
-        "raylib"
     }
 
     targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
     objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
-
-    filter "system:windows"
-        systemversion "latest"
-
-        links
-        {
-            "opengl32",
-            "gdi32",
-            "winmm"
-        }
 
     filter "configurations:Debug"
         defines { "DEBUG" }
