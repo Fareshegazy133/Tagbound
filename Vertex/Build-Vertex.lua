@@ -1,37 +1,86 @@
-project "Vertex"
-   kind "StaticLib"
-   language "C++"
-   cppdialect "C++20"
-   targetdir "Binaries/%{cfg.buildcfg}"
-   staticruntime "off"
+project "VertexRuntime"
+    kind "StaticLib"
+    language "C++"
+    cppdialect "C++20"
+    staticruntime "off"
 
-   files { "Source/**.h", "Source/**.cpp" }
+    files
+    {
+        "Runtime/Source/**.h",
+        "Runtime/Source/**.cpp"
+    }
 
-   includedirs
-   {
-      "Source"
-   }
+    includedirs
+    {
+        "Runtime/Source"
+    }
 
-   targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
-   objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
+    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
+    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
-   filter "system:windows"
-       systemversion "latest"
-       defines { }
+    filter "system:windows"
+        systemversion "latest"
 
-   filter "configurations:Debug"
-       defines { "DEBUG" }
-       runtime "Debug"
-       symbols "On"
+    filter "configurations:Debug"
+        defines { "DEBUG" }
+        runtime "Debug"
+        symbols "On"
 
-   filter "configurations:Release"
-       defines { "RELEASE" }
-       runtime "Release"
-       optimize "On"
-       symbols "On"
+    filter "configurations:Release"
+        defines { "RELEASE" }
+        runtime "Release"
+        optimize "On"
+        symbols "On"
 
-   filter "configurations:Dist"
-       defines { "DIST" }
-       runtime "Release"
-       optimize "On"
-       symbols "Off"
+    filter "configurations:Dist"
+        defines { "DIST" }
+        runtime "Release"
+        optimize "On"
+        symbols "Off"
+
+
+project "VertexEditor"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++20"
+    staticruntime "off"
+
+    files
+    {
+        "Editor/Source/**.h",
+        "Editor/Source/**.cpp"
+    }
+
+    includedirs
+    {
+        "Runtime/Source",
+        "Editor/Source"
+    }
+
+    links
+    {
+        "VertexRuntime"
+    }
+
+    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
+    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
+
+    filter "system:windows"
+        systemversion "latest"
+
+    filter "configurations:Debug"
+        defines { "DEBUG" }
+        runtime "Debug"
+        symbols "On"
+
+    filter "configurations:Release"
+        defines { "RELEASE" }
+        runtime "Release"
+        optimize "On"
+        symbols "On"
+
+    filter "configurations:Dist"
+        defines { "DIST" }
+        runtime "Release"
+        optimize "On"
+        symbols "Off"

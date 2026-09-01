@@ -10,12 +10,12 @@ project "Tagbound"
    includedirs
    {
       "Source",
-	  "../Vertex/Source"
+	  "../Vertex/Runtime/Source"
    }
 
    links
    {
-      "Vertex"
+      "VertexRuntime"
    }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")

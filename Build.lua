@@ -2,7 +2,7 @@
 workspace "Tagbound"
    architecture "x64"
    configurations { "Debug", "Release", "Dist" }
-   startproject "Tagbound"
+   startproject "VertexEditor"
 
    -- Workspace-wide build options for MSVC
    filter "system:windows"
