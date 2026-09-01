@@ -1,43 +1,54 @@
 project "Tagbound"
-   kind "ConsoleApp"
-   language "C++"
-   cppdialect "C++20"
-   targetdir "Binaries/%{cfg.buildcfg}"
-   staticruntime "off"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++20"
+    staticruntime "off"
 
-   files { "Source/**.h", "Source/**.cpp" }
+    files
+    {
+        "Source/**.h",
+        "Source/**.cpp"
+    }
 
-   includedirs
-   {
-      "Source",
-	  "../Vertex/Runtime/Source"
-   }
+    includedirs
+    {
+        "Source",
+        "../Vertex/Runtime/Source",
+        "../Vertex/Vendor/raylib/src"
+    }
 
-   links
-   {
-      "VertexRuntime"
-   }
+    links
+    {
+        "VertexRuntime",
+        "raylib"
+    }
 
-   targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
-   objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
+    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
+    objdir ("../Binaries/Intermediates/" .. OutputDir .. "/%{prj.name}")
 
-   filter "system:windows"
-       systemversion "latest"
-       defines { "WINDOWS" }
+    filter "system:windows"
+        systemversion "latest"
 
-   filter "configurations:Debug"
-       defines { "DEBUG" }
-       runtime "Debug"
-       symbols "On"
+        links
+        {
+            "opengl32",
+            "gdi32",
+            "winmm"
+        }
 
-   filter "configurations:Release"
-       defines { "RELEASE" }
-       runtime "Release"
-       optimize "On"
-       symbols "On"
+    filter "configurations:Debug"
+        defines { "DEBUG" }
+        runtime "Debug"
+        symbols "On"
 
-   filter "configurations:Dist"
-       defines { "DIST" }
-       runtime "Release"
-       optimize "On"
-       symbols "Off"
+    filter "configurations:Release"
+        defines { "RELEASE" }
+        runtime "Release"
+        optimize "On"
+        symbols "On"
+
+    filter "configurations:Dist"
+        defines { "DIST" }
+        runtime "Release"
+        optimize "On"
+        symbols "Off"

@@ -1,3 +1,6 @@
+include "Vendor/raylib-premake.lua"
+
+
 project "VertexRuntime"
     kind "StaticLib"
     language "C++"
@@ -12,7 +15,8 @@ project "VertexRuntime"
 
     includedirs
     {
-        "Runtime/Source"
+        "Runtime/Source",
+        "Vendor/raylib/src"
     }
 
     targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
@@ -59,7 +63,8 @@ project "VertexEditor"
 
     links
     {
-        "VertexRuntime"
+        "VertexRuntime",
+        "raylib"
     }
 
     targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
@@ -67,6 +72,13 @@ project "VertexEditor"
 
     filter "system:windows"
         systemversion "latest"
+
+        links
+        {
+            "opengl32",
+            "gdi32",
+            "winmm"
+        }
 
     filter "configurations:Debug"
         defines { "DEBUG" }
